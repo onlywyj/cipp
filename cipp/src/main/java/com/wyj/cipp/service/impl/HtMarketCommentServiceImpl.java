@@ -22,7 +22,7 @@ public class HtMarketCommentServiceImpl implements HtMarketCommentService {
     public Map getMarketComment(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<CommitListModel> marketComment = htMarketCommentDao.getMarketComment();
                 map.put("code",0);
@@ -41,7 +41,7 @@ public class HtMarketCommentServiceImpl implements HtMarketCommentService {
     public Map delMarketComment(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htMarketCommentDao.delMarketComment(id);
                 map.put("code",i>0?0:1);

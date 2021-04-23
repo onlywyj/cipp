@@ -1,4 +1,4 @@
-package cc.wx.unit;
+package com.wyj.cipp.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

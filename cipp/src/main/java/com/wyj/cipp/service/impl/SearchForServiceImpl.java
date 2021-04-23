@@ -24,7 +24,7 @@ public class SearchForServiceImpl implements SearchForService {
         ArrayList<ActivityModel> list2 = new ArrayList<ActivityModel>();
         List<MarketModel> list3 = new ArrayList<>();
         ArrayList list = new ArrayList();
-        if (!cc.wx.unit.tool.isNull(title)) {
+        if (!com.wyj.cipp.utils.tool.isNull(title)) {
             // 0 搜索活动  1 搜索比赛  2 搜索二手物品
             title = "%"+title+"%";
             switch (types) {

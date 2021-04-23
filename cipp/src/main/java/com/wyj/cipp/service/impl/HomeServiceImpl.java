@@ -31,7 +31,7 @@ public class HomeServiceImpl implements HomeService {
     //首页活动展示
     public ArrayList GetEventsGallery(String show, Integer page) {
         ArrayList list = new ArrayList();
-        if (!cc.wx.unit.tool.isNull(show)) {
+        if (!com.wyj.cipp.utils.tool.isNull(show)) {
             ArrayList<ActivityModel> list2 = new ArrayList<ActivityModel>();
             // 0 得到最新活动  1 得到最热活动  2 得到已结束活动  3 得到最新比赛  4 得到最热比赛  5 得到已结束比赛
             switch (show) {
@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
                     break;
                 case "5":list2 = (ArrayList<ActivityModel>) activityDao.GetEventEnded(System.currentTimeMillis(), "比赛",(page-1)*8);
             }
-            if (!cc.wx.unit.tool.isNull(list) || !list.isEmpty()) {
+            if (!com.wyj.cipp.utils.tool.isNull(list) || !list.isEmpty()) {
                 for (ActivityModel mo: list2) {
                     String[] img =  mo.getImg().split(",");
                     mo.setImg(img[0]);
@@ -71,7 +71,7 @@ public class HomeServiceImpl implements HomeService {
         Integer i = activityDao.getCount(type);
         HashMap map = new HashMap();
         map.put("code",0);
-        if(!cc.wx.unit.tool.isNull(i) && i!=0){
+        if(!com.wyj.cipp.utils.tool.isNull(i) && i!=0){
             map.put("code",1);
             map.put("size",i);
         }
@@ -82,8 +82,8 @@ public class HomeServiceImpl implements HomeService {
     public Map insertCertification(String session, String department) {
         HashMap map = new HashMap();
         String name = activityDao.getOriginalName(session);
-        if(!cc.wx.unit.tool.isNull((Object)name) && !cc.wx.unit.tool.isNull(name) && !cc.wx.unit.tool.isNull(department)){
-            if(cc.wx.unit.tool.isNull(department)){
+        if(!com.wyj.cipp.utils.tool.isNull((Object)name) && !com.wyj.cipp.utils.tool.isNull(name) && !com.wyj.cipp.utils.tool.isNull(department)){
+            if(com.wyj.cipp.utils.tool.isNull(department)){
                 map.put("code", 3);
                 map.put("message","申请的部门不能为空");
                 return map;
@@ -107,11 +107,11 @@ public class HomeServiceImpl implements HomeService {
             map.put("message","密码必须在6~16位之间");
             return map;
         }
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             String username = identity.get("username").toString();
-            Integer i = userLoginDao.updatePssWord(username, cc.wx.unit.Sha256.getSHA256(password), cc.wx.unit.Sha256.getSHA256(newPassword));
+            Integer i = userLoginDao.updatePssWord(username, com.wyj.cipp.utils.Sha256.getSHA256(password), com.wyj.cipp.utils.Sha256.getSHA256(newPassword));
             if(i>0){
-                String updateSession = username+ cc.wx.unit.Sha256.getSHA256(newPassword)+System.currentTimeMillis();
+                String updateSession = username+ com.wyj.cipp.utils.Sha256.getSHA256(newPassword)+System.currentTimeMillis();
                 userLoginDao.UserUpdateSession(updateSession,username);
                 map.put("code",1);
                 map.put("message","修改成功");
@@ -128,8 +128,8 @@ public class HomeServiceImpl implements HomeService {
         HashMap map = new HashMap();
         Integer i =0;
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
-            if(!cc.wx.unit.tool.isNull(value)) {
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
+            if(!com.wyj.cipp.utils.tool.isNull(value)) {
                 if(filed.equals("title"))
                     i = userLoginDao.updateNick(identity.get("username").toString(), "nickname", value);
                 if(filed.equals("img"))

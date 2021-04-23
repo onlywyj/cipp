@@ -1,4 +1,4 @@
-package cc.wx.unit;
+package com.wyj.cipp.utils;
 
 public class tool {
 

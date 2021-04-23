@@ -22,7 +22,7 @@ public class HtUserInfoServiceImpl implements HtUserInfoService {
     public Map getUserInfo(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<UserInfoModel> userInfo = htUserInfoDao.getUserInfo();
                 map.put("code",0);
@@ -46,7 +46,7 @@ public class HtUserInfoServiceImpl implements HtUserInfoService {
     public Map delUserInfo(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htUserInfoDao.delUserInfo(id);
                 map.put("code",i>0?0:1);
@@ -63,9 +63,9 @@ public class HtUserInfoServiceImpl implements HtUserInfoService {
     public Map updateUserInfo(String session, String id, String field) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
-                String s = cc.wx.unit.Sha256.getSHA256(field);
+                String s = com.wyj.cipp.utils.Sha256.getSHA256(field);
                 Integer i = htUserInfoDao.updateUserInfo(id, s);
                 map.put("code",i>0?0:1);
                 map.put("msg",i>0?"修改成功":"修改失败");

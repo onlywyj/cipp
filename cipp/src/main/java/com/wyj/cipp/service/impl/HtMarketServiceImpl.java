@@ -23,7 +23,7 @@ public class HtMarketServiceImpl implements HtMarketService {
     public Map getMarket(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<MarketModel> market = htMarketDao.getMarket();
                 map.put("code",0);
@@ -42,7 +42,7 @@ public class HtMarketServiceImpl implements HtMarketService {
     public Map delMarket(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htMarketDao.delMarket(id);
                 map.put("code",i>0?0:1);

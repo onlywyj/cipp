@@ -34,7 +34,7 @@ public class SubmitInformationController {
     @PostMapping("/commentSubmission")
     public Map insertComment(@Validated @RequestBody CommentModel comment, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return cc.wx.unit.ErrorResult.getFieldErrors(bindingResult);
+            return com.wyj.cipp.utils.ErrorResult.getFieldErrors(bindingResult);
 
         }
         Map map = submitInformationService.insertComment(comment);

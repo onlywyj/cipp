@@ -25,11 +25,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         HashMap infoMap = new HashMap();
         infoMap.put("code",0);
         infoMap.put("message","登录失效");
-        if (!cc.wx.unit.tool.isNull(session)){
+        if (!com.wyj.cipp.utils.tool.isNull(session)){
             Map map = submitInformationDao.GetIdentity(session);
-            if (!cc.wx.unit.tool.isNull(map) && !map.isEmpty()){
+            if (!com.wyj.cipp.utils.tool.isNull(map) && !map.isEmpty()){
                 list = (ArrayList<ActivityModel>) userInfoDao.getUserReleaseNews(map.get("username").toString());
-                if(!cc.wx.unit.tool.isNull(list) && !list.isEmpty()){
+                if(!com.wyj.cipp.utils.tool.isNull(list) && !list.isEmpty()){
                     ArrayList list2 = new ArrayList();
                     for (ActivityModel mo : list) {
                         String[] img =  mo.getImg().split(",");
@@ -53,7 +53,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         Map identity = submitInformationDao.GetIdentity(session);
         HashMap map = new HashMap();
         Integer i = 0;
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             i = userInfoDao.delMyActivity(identity.get("username").toString(), id);
             if (i>0) userInfoDao.delActivityComment(id);
             map.put("code",i);
@@ -70,9 +70,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         Map map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
         map.put("code",0);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             Integer commendId = userInfoDao.judgeComment(identity.get("username").toString(), id);
-            if(!cc.wx.unit.tool.isNull(commendId)) map.put("code",1);
+            if(!com.wyj.cipp.utils.tool.isNull(commendId)) map.put("code",1);
         }
         return map;
     }
@@ -83,7 +83,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         Map identity = submitInformationDao.GetIdentity(session);
         map.put("code",0);
         map.put("message","失败");
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             Integer i = userInfoDao.delMyComment(identity.get("username").toString(), id);
             if(i>0) {
                 map.put("code",1);

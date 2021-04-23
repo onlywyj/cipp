@@ -1,4 +1,4 @@
-package cc.wx.unit;
+package com.wyj.cipp.utils;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

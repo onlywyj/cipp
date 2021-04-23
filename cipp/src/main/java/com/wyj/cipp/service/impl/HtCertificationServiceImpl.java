@@ -23,7 +23,7 @@ public class HtCertificationServiceImpl implements HtCertificationService {
     public Map getCertification(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<CertificationModel> certification = htCertificationDao.getCertification();
                 map.put("code",0);
@@ -42,7 +42,7 @@ public class HtCertificationServiceImpl implements HtCertificationService {
     public Map certification(String session, String id, String agree) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htCertificationDao.certification(id,agree);
                 if (i>0 && agree.equals("同意")){

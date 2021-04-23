@@ -22,7 +22,7 @@ public class HtCarouselServiceImpl implements HtCarouselService {
     public Map getCarousel(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<CarouselModel> carousel = htCarouselDao.getCarousel();
                 map.put("code",0);
@@ -41,7 +41,7 @@ public class HtCarouselServiceImpl implements HtCarouselService {
     public Map delCarousel(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htCarouselDao.delCarousel(id);
                 map.put("code",i>0?0:1);
@@ -59,7 +59,7 @@ public class HtCarouselServiceImpl implements HtCarouselService {
     public Map addCarousel(String img, String judUrl, String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htCarouselDao.addCarousel(img,judUrl);
                 map.put("code",i>0?0:1);

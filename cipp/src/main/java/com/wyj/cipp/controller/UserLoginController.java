@@ -27,7 +27,7 @@ public class UserLoginController {
     @PostMapping("/registeredUser")
     public Map InsertUserInfo(@Validated @RequestBody UserLoginModel userLoginModel, BindingResult bindingResult){
               if(bindingResult.hasErrors()){
-          return cc.wx.unit.ErrorResult.getFieldErrors(bindingResult);
+          return com.wyj.cipp.utils.ErrorResult.getFieldErrors(bindingResult);
         }
 
         Map map = userLoginService.InsertUserInfo(userLoginModel);

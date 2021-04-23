@@ -29,10 +29,10 @@ public class ActivityDetailsServiceImpl implements ActivityDetailsService {
     public Map GetActivityDetails(String id,String session) {
         Map map = new HashMap();
         System.out.println(id);
-        if(!cc.wx.unit.tool.isNull(id)){
+        if(!com.wyj.cipp.utils.tool.isNull(id)){
             map = activityDetailsDao.GetActivityDetails(id);
             activityDetailsDao.updatePageViews(id);
-            if(!cc.wx.unit.tool.isNull(map) && !map.isEmpty()){
+            if(!com.wyj.cipp.utils.tool.isNull(map) && !map.isEmpty()){
                 String event_name = map.get("event_publisher_name").toString();
                 map.remove("event_publisher_name");
                 Map userInfo = activityDetailsDao.GetUserInfo(event_name);
@@ -58,7 +58,7 @@ public class ActivityDetailsServiceImpl implements ActivityDetailsService {
                 map.put("activityOverTime",activityOverTime);
                 String like = activityDetailsDao.getLike(id, session);
                 map.put("like",false);
-                if(!cc.wx.unit.tool.isNull((Object)like) && !cc.wx.unit.tool.isNull(like)){
+                if(!com.wyj.cipp.utils.tool.isNull((Object)like) && !com.wyj.cipp.utils.tool.isNull(like)){
                     map.put("like",true);
                 }
             }else{
@@ -77,9 +77,9 @@ public class ActivityDetailsServiceImpl implements ActivityDetailsService {
     public Map updateLike(String session, String id) {
         Map map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             String like = activityDetailsDao.getLike(id, identity.get("username").toString());
-            if(cc.wx.unit.tool.isNull((Object)like) || cc.wx.unit.tool.isNull(like)){
+            if(com.wyj.cipp.utils.tool.isNull((Object)like) || com.wyj.cipp.utils.tool.isNull(like)){
                 Integer i = activityDetailsDao.insertLike(id, identity.get("username").toString());
                 if (i>0) activityDetailsDao.updateLike(id);
                 map.put("code",i);

@@ -23,10 +23,10 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     //用户注册，账号是否已经注册
     public Map InsertUserInfo(UserLoginModel userInfoModel){
-        String username = cc.wx.unit.Sha256.getSHA256(userInfoModel.getName().toString());
+        String username = com.wyj.cipp.utils.Sha256.getSHA256(userInfoModel.getName().toString());
         HashMap map = new HashMap();
-        if(cc.wx.unit.tool.isNull(userLoginDao.JudgeUserName(username))){
-            String userpass = cc.wx.unit.Sha256.getSHA256(userInfoModel.getPassword());
+        if(com.wyj.cipp.utils.tool.isNull(userLoginDao.JudgeUserName(username))){
+            String userpass = com.wyj.cipp.utils.Sha256.getSHA256(userInfoModel.getPassword());
             Integer i = userLoginDao.InsertUserName(username, userpass, userInfoModel.getNickname(),userInfoModel.getName().toString());
             map.put("code",i);
             map.put("message",i>0?"注册成功":"注册失败");
@@ -39,12 +39,12 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     //登录检测,登录成功更新session
     public Map UserLogin(LoginModel loginModel){
-        String username = cc.wx.unit.Sha256.getSHA256(loginModel.getName());
-        String userpass = cc.wx.unit.Sha256.getSHA256(loginModel.getPassword());
+        String username = com.wyj.cipp.utils.Sha256.getSHA256(loginModel.getName());
+        String userpass = com.wyj.cipp.utils.Sha256.getSHA256(loginModel.getPassword());
         HashMap map = new HashMap();
         Map userInfo = userLoginDao.UserLogin(username, userpass);
-        if(!cc.wx.unit.tool.isNull(userInfo)){
-            String session = cc.wx.unit.Sha256.getSHA256(username + userpass + System.currentTimeMillis());
+        if(!com.wyj.cipp.utils.tool.isNull(userInfo)){
+            String session = com.wyj.cipp.utils.Sha256.getSHA256(username + userpass + System.currentTimeMillis());
             userLoginDao.UserUpdateSession(session, username);
             map.put("code",1);
             map.put("message","登录成功");
