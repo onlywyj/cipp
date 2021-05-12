@@ -1,6 +1,5 @@
 package com.wyj.cipp.dao;
 
-import com.wyj.cipp.model.CommentModel;
 import com.wyj.cipp.model.CommitListModel;
 import com.wyj.cipp.model.MarketModel;
 import org.apache.ibatis.annotations.*;
@@ -72,10 +71,9 @@ public interface MarketDao {
     //插入评论
     @Insert("INSERT INTO market_comment ( activity_id, event_publisher_name, comment, comment_time )\n" +
             "VALUES\n" +
-            "\t( #{id}, #{name}, #{comment}, #{time} )")
-    Integer insertMarketComment(CommentModel commentModel,
-                                @Param("time") String time,
-                                @Param("name") String name);
+            "\t( #{id}, #{name}, #{comment}, #{comment_time} )")
+    Integer insertMarketComment(@Param("id") String id,@Param("comment") String comment,
+                                @Param("comment_time") String comment_time,@Param("name") String name);
 
     //查询多少条数据
     @Select("SELECT COUNT(ID) FROM market WHERE sold='f'")
