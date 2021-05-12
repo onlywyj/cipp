@@ -27,14 +27,14 @@ public class MarketServiceImpl implements MarketService {
     public Map insertMarketInfo(MarketModel marketModel) {
         Map map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(marketModel.getSession());
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             marketModel.setUsername(identity.get("username").toString());
             String introduction = marketModel.getInfo();
-            if(cc.wx.unit.tool.isNull((Object)introduction) || cc.wx.unit.tool.isNull(introduction)){
+            if(com.wyj.cipp.utils.tool.isNull((Object)introduction) || com.wyj.cipp.utils.tool.isNull(introduction)){
                 marketModel.setInfo("此物品暂无描述");
             }
             String content = marketModel.getContent();
-            if(cc.wx.unit.tool.isNull((Object)content) || cc.wx.unit.tool.isNull(content)){
+            if(com.wyj.cipp.utils.tool.isNull((Object)content) || com.wyj.cipp.utils.tool.isNull(content)){
                 marketModel.setInfo("此物品暂无内容");
             }
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -57,7 +57,7 @@ public class MarketServiceImpl implements MarketService {
         List<MarketModel> list = marketDao.getMarketList((page-1)*20);
         map.put("code",0);
         map.put("message","暂无信息");
-        if(!cc.wx.unit.tool.isNull(list) && !list.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(list) && !list.isEmpty()){
             List list2 = new ArrayList();
             map.put("code",1);
             for (MarketModel mo:list) {
@@ -77,11 +77,11 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public Map getMyMarketInfo(String session,Integer page) {
         HashMap map = new HashMap();
-        if(!cc.wx.unit.tool.isNull(session)){
+        if(!com.wyj.cipp.utils.tool.isNull(session)){
             Map identity = submitInformationDao.GetIdentity(session);
-            if (!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+            if (!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
                 List<MarketModel> list = marketDao.getMyMarketInfo(identity.get("username").toString(),(page-1)*8);
-                if(!cc.wx.unit.tool.isNull(list) && !list.isEmpty()){
+                if(!com.wyj.cipp.utils.tool.isNull(list) && !list.isEmpty()){
                     map.put("code",1);
                     List list2 = new ArrayList();
                     for (MarketModel mo:list) {
@@ -110,7 +110,7 @@ public class MarketServiceImpl implements MarketService {
     public Map delMarketInfo(String id,String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             Integer i = marketDao.delMarketInfo(id, identity.get("username").toString());
             if(i>0) marketDao.delMarketComment(id,identity.get("username").toString());
             map.put("code",i);
@@ -126,7 +126,7 @@ public class MarketServiceImpl implements MarketService {
     public Map getMarketInfo(String id) {
         HashMap map = new HashMap();
         Map marketInfo = marketDao.getMarketInfo(id);
-        if(!cc.wx.unit.tool.isNull(marketInfo) && !marketInfo.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(marketInfo) && !marketInfo.isEmpty()){
             map.put("code",1);
             String img = marketInfo.get("img").toString();
             String[] imgList = img.split(",");
@@ -145,9 +145,9 @@ public class MarketServiceImpl implements MarketService {
     public Map updateMarket(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             String market = marketDao.getMyMarket(identity.get("username").toString(), id);
-            if(cc.wx.unit.tool.isNull((Object)market)) {
+            if(com.wyj.cipp.utils.tool.isNull((Object)market)) {
                 map.put("code",4);
                 map.put("message","暂无参数");
                 return map;
@@ -173,13 +173,13 @@ public class MarketServiceImpl implements MarketService {
         map.put("code",2);
         map.put("message","登录失效");
         Map identity = submitInformationDao.GetIdentity(commentModel.getSession());
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             //当前评论时间
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             String time = now.format(dateTimeFormatter);
             String username = identity.get("username").toString();
-            Integer i = marketDao.insertMarketComment(commentModel,time,username);
+            Integer i = marketDao.insertMarketComment(commentModel.getId(), commentModel.getComment(), time, username);
             map.put("code",i);
             map.put("message",i>0?"成功":"失败");
         }

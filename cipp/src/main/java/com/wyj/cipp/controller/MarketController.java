@@ -22,7 +22,7 @@ public class MarketController {
     @PostMapping("/marketInfoSub")
     public Map insertMarketInfo(@Validated @RequestBody MarketModel market, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return cc.wx.unit.ErrorResult.getFieldErrors(bindingResult);
+            return com.wyj.cipp.utils.ErrorResult.getFieldErrors(bindingResult);
         }
         Map map = marketService.insertMarketInfo(market);
         return map;
@@ -67,10 +67,10 @@ public class MarketController {
     }
 
     //插入评论
-    @GetMapping("/insertMarketComment")
+    @PostMapping("/insertMarketComment")
     public Map insertComment(@Validated @RequestBody CommentModel comment, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return cc.wx.unit.ErrorResult.getFieldErrors(bindingResult);
+            return com.wyj.cipp.utils.ErrorResult.getFieldErrors(bindingResult);
         }
         Map map = marketService.insertComment(comment);
         return map;
