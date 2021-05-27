@@ -6,8 +6,10 @@ package com.wyj.cipp.config;/*
  *
  */
 
+import com.wyj.cipp.Interceptor.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,11 +18,22 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //需要支持跨域访问的文件路径
-        registry.addMapping("/wyj/cipp/controller/**;/wyj/cipp/htcontroller/**")
+        registry.addMapping("/wyj/cipp/controller/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
                 .maxAge(3600);
+    }
+
+    //注册连接器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginHandlerInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/htlogin")
+                .excludePathPatterns("/htuser/htlogin")
+                .excludePathPatterns("/htmain")
+                .excludePathPatterns("/x-admin/**");
     }
 
     @Override

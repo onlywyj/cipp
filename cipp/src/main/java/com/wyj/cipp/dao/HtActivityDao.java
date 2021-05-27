@@ -26,6 +26,7 @@ public interface HtActivityDao {
             "\ta.promotional_graphics AS img,\n" +
             "\ta.page_views AS 'show',\n" +
             "\ta.likes AS good,\n" +
+            "\ta.type AS type,\n" +
             "\ta.release_time AS time \n" +
             "FROM\n" +
             "\tactivity a")

@@ -22,9 +22,9 @@ public class SubmitInformationServiceImpl implements SubmitInformationService {
         Map map = new HashMap();
         map.put("code",3);
         map.put("message","登录失效");
-        if(!cc.wx.unit.tool.isNull((Object) activityModel.getSession()) && !cc.wx.unit.tool.isNull(activityModel.getSession())){
+        if(!com.wyj.cipp.utils.tool.isNull((Object) activityModel.getSession()) && !com.wyj.cipp.utils.tool.isNull(activityModel.getSession())){
             Map identity = submitInformationDao.GetIdentity(activityModel.getSession());
-            if (!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+            if (!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
                 String certification = identity.get("certification").toString();
                 if(!("0").equals(certification)){
                     activityModel.setEvent_publisher_name(identity.get("username").toString());
@@ -35,13 +35,13 @@ public class SubmitInformationServiceImpl implements SubmitInformationService {
                     activityModel.setTime(s);
                     //将yyyy-MM-dd转换为时间戳
                     String pattern = "yyyy-MM-dd";
-                    Long enlistStartTime = cc.wx.unit.DateConversion.date2TimeStamp(activityModel.getEnlistStartTime()
+                    Long enlistStartTime = com.wyj.cipp.utils.DateConversion.date2TimeStamp(activityModel.getEnlistStartTime()
                             +"T00:00:00",pattern);
-                    Long enlistOverTime = cc.wx.unit.DateConversion.date2TimeStamp(activityModel.getEnlistOverTime()
+                    Long enlistOverTime = com.wyj.cipp.utils.DateConversion.date2TimeStamp(activityModel.getEnlistOverTime()
                             +"T00:00:00",pattern);
-                    Long activityStartTime = cc.wx.unit.DateConversion.date2TimeStamp(activityModel.getActivityStartTime()
+                    Long activityStartTime = com.wyj.cipp.utils.DateConversion.date2TimeStamp(activityModel.getActivityStartTime()
                             +"T00:00:00",pattern);
-                    Long activityOverTime = cc.wx.unit.DateConversion.date2TimeStamp(activityModel.getActivityOverTime()
+                    Long activityOverTime = com.wyj.cipp.utils.DateConversion.date2TimeStamp(activityModel.getActivityOverTime()
                             +"T00:00:00",pattern);
                     activityModel.setEnlistStartTime(enlistStartTime.toString());
                     activityModel.setEnlistOverTime(enlistOverTime.toString());
@@ -64,9 +64,9 @@ public class SubmitInformationServiceImpl implements SubmitInformationService {
         HashMap map = new HashMap();
         map.put("code",2);
         map.put("message","登录失效");
-        if (!cc.wx.unit.tool.isNull(commentModel.getSession())){
+        if (!com.wyj.cipp.utils.tool.isNull(commentModel.getSession())){
             Map identity = submitInformationDao.GetIdentity(commentModel.getSession());
-            if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+            if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
                 //当前评论时间
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();

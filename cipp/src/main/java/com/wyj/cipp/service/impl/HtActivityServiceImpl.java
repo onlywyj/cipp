@@ -24,18 +24,18 @@ public class HtActivityServiceImpl implements HtActivityService {
     public Map getActivity(String session) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 List<ActivityModel> activity = htActivityDao.getActivity();
                 List list = new ArrayList();
                 for(ActivityModel mo:activity){
-                    mo.setEnlistStartTime(cc.wx.unit.DateConversion.timeStamp2Date(
+                    mo.setEnlistStartTime(com.wyj.cipp.utils.DateConversion.timeStamp2Date(
                             Long.parseLong(mo.getEnlistStartTime()),"yyyy-MM-dd"));
-                    mo.setEnlistOverTime(cc.wx.unit.DateConversion.timeStamp2Date(
+                    mo.setEnlistOverTime(com.wyj.cipp.utils.DateConversion.timeStamp2Date(
                             Long.parseLong(mo.getEnlistOverTime()),"yyyy-MM-dd"));
-                    mo.setActivityStartTime(cc.wx.unit.DateConversion.timeStamp2Date(
+                    mo.setActivityStartTime(com.wyj.cipp.utils.DateConversion.timeStamp2Date(
                             Long.parseLong(mo.getActivityStartTime()),"yyyy-MM-dd"));
-                    mo.setActivityOverTime(cc.wx.unit.DateConversion.timeStamp2Date(
+                    mo.setActivityOverTime(com.wyj.cipp.utils.DateConversion.timeStamp2Date(
                             Long.parseLong(mo.getActivityOverTime()),"yyyy-MM-dd"));
                     list.add(mo);
                 }
@@ -55,7 +55,7 @@ public class HtActivityServiceImpl implements HtActivityService {
     public Map delActivity(String session, String id) {
         HashMap map = new HashMap();
         Map identity = submitInformationDao.GetIdentity(session);
-        if(!cc.wx.unit.tool.isNull(identity) && !identity.isEmpty()){
+        if(!com.wyj.cipp.utils.tool.isNull(identity) && !identity.isEmpty()){
             if(identity.get("certification").equals("管理员")){
                 Integer i = htActivityDao.delActivity(id);
                 map.put("code",i>0?0:1);
@@ -66,5 +66,10 @@ public class HtActivityServiceImpl implements HtActivityService {
             }
         }
         return map;
+    }
+
+    @Override
+    public List<ActivityModel> selectAll() {
+        return htActivityDao.getActivity();
     }
 }

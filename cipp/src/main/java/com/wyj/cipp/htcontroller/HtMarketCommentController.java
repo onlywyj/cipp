@@ -1,14 +1,16 @@
 package com.wyj.cipp.htcontroller;
 
 import com.wyj.cipp.service.HtMarketCommentService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.Map;
 
-@CrossOrigin
-@RestController
-@RequestMapping("/v1/private")
+@Controller
+@RequestMapping("/admin")
 public class HtMarketCommentController {
     @Resource
     private HtMarketCommentService htMarketCommentService;
