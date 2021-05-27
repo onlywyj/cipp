@@ -183,7 +183,7 @@
 				}
 				console.log(data)
 				var that = this;
-				this.$http.post("/api/commentSubmission",data).then(function(e){
+				this.$http.post("/api/insertMarketComment",data).then(function(e){
 					if(e.data.code==1){
 						that.$message.success("评论成功");
 						

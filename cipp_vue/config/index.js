@@ -6,22 +6,16 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    //本地启动Vue默认配置 dev
-    // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    port: 10001, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: 'localhost', 
+    port: 10001, 
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
-    // Paths
+    poll: false, 
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
 		'/api': {
-			 //target: 'http://106.15.197.17:8080',  //目标接口域名
        target: 'http://localhost:9999/',
 			 changeOrigin: true,  //是否跨域
 			 pathRewrite: {
@@ -29,13 +23,12 @@ module.exports = {
 				}
 		  },
     	'/bdapi': {
-    		 target: 'http://localhost:10001/',  //目标接口域名
+    		target: 'http://localhost:10001/',  //目标接口域名
     		 changeOrigin: true,  //是否跨域
     		 pathRewrite: {
     			'^/bdapi': '/static/json'   ,//重写接口
     			}
     	  }
-
     },
 
 
