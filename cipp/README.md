@@ -1,3 +1,9 @@
+---
+title: 'CIPP'
+date: 2021-02-03
+author: 王雅军
+---
+
 ### 校园信息发布平台（CIPP）
 ### Campus Information Publishing Platform
 

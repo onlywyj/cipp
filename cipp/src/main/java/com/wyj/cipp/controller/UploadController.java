@@ -26,7 +26,8 @@ public class UploadController {
         HashMap map = new HashMap();
         if(uploadFile!=null){
             // 指定上传图片的保存路径
-            String path=request.getSession().getServletContext().getRealPath("/image/");
+            //String path = System.getProperty("user.dir")+"/uploads/";
+            String path = "/www/wwwroot/http/uploads";
             System.out.println(path);
             // 获取上传的文件名全称
             String fileName=uploadFile.getOriginalFilename();
@@ -45,7 +46,8 @@ public class UploadController {
             File file=new File(path + newFileName);
             // 将上传的文件写入指定文件
             uploadFile.transferTo(file);
-           map.put("dizhi","http://localhost:9999/resources/image/"+newFileName);
+            //map.put("dizhi","http://localhost:9999/uploads/"+newFileName);
+            map.put("dizhi","http://106.15.197.17/uploads/"+newFileName);
         }
         return map;
     }
