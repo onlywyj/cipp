@@ -1,3 +1,4 @@
 /.idea
 /cipp_server/.mvn
 /cipp_server/src/main/resources/image
+/cipp/uploads

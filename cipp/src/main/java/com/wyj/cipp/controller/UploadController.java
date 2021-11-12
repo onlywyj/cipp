@@ -47,6 +47,9 @@ public class UploadController {
             // 将上传的文件写入指定文件
             uploadFile.transferTo(file);
             //map.put("dizhi","http://localhost:9999/uploads/"+newFileName);
+
+            //将文件上传至服务器目录，并将此文件映射出来使其可以外部访问
+            //也可以使用OSS等存储
             map.put("dizhi","http://106.15.197.17/uploads/"+newFileName);
         }
         return map;
